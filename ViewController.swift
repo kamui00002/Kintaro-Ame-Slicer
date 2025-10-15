@@ -18,18 +18,29 @@ class ViewController: UIViewController {
     }
     
     private func loadGame() {
-        let devServerURL = "http://192.168.0.12:3000"
-        print("🌐 Loading game from: \(devServerURL)")
+        // 複数のURLを試す
+        let urls = [
+            "http://localhost:3000",      // シミュレーター用
+            "http://127.0.0.1:3000",      // シミュレーター用（代替）
+            "http://192.168.0.12:3000"    // 実機用
+        ]
         
-        guard let url = URL(string: devServerURL) else {
-            print("❌ Invalid URL: \(devServerURL)")
-            showError()
+        for (index, devServerURL) in urls.enumerated() {
+            print("🌐 Attempt \(index + 1): Loading game from: \(devServerURL)")
+            
+            guard let url = URL(string: devServerURL) else {
+                print("❌ Invalid URL: \(devServerURL)")
+                continue
+            }
+            
+            let request = URLRequest(url: url)
+            webView.load(request)
+            print("📡 Request sent to: \(devServerURL)")
             return
         }
         
-        let request = URLRequest(url: url)
-        webView.load(request)
-        print("📡 Request sent to development server")
+        print("❌ All URLs failed")
+        showError()
     }
     
     private func showError() {
@@ -93,7 +104,7 @@ class ViewController: UIViewController {
                 <div class="loading"></div>
                 <p>ゲームを読み込み中...</p>
                 <p>開発サーバーに接続しています</p>
-                <p><strong>URL:</strong> http://192.168.0.12:3000</p>
+                <p><strong>URL:</strong> http://localhost:3000</p>
                 <p>しばらくお待ちください...</p>
             </div>
         </body>
