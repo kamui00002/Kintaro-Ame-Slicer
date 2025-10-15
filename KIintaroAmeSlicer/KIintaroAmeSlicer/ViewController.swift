@@ -9,37 +9,100 @@ class ViewController: UIViewController {
         
         print("🎮 ViewController loaded")
         
-        // WebViewの設定
+        // WebViewの設定を強化
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.bounces = false
+        webView.isOpaque = true
+        webView.backgroundColor = UIColor.white
+        webView.alpha = 1.0
+        webView.isHidden = false
+        
+        // JavaScript設定
+        webView.configuration.preferences.javaScriptEnabled = true
+        webView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
+        webView.configuration.allowsInlineMediaPlayback = true
+        webView.configuration.mediaTypesRequiringUserActionForPlayback = []
+        
+        // WebViewのサイズを強制設定
+        setupWebViewConstraints()
         
         // 開発サーバーから読み込み
         loadGame()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // WebViewのサイズを確認
+        print("📐 viewDidLayoutSubviews:")
+        print("   - View frame: \(view.frame)")
+        print("   - WebView frame: \(webView.frame)")
+        print("   - WebView bounds: \(webView.bounds)")
+        
+        // もしWebViewのサイズが0なら、強制的に設定
+        if webView.frame.width == 0 || webView.frame.height == 0 {
+            print("⚠️ WebView size is 0, forcing layout...")
+            webView.frame = view.bounds
+            webView.setNeedsLayout()
+            webView.layoutIfNeeded()
+        }
+    }
+    
+    private func setupWebViewConstraints() {
+        // Auto Layoutを無効化
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 既存の制約を削除
+        webView.removeFromSuperview()
+        view.addSubview(webView)
+        
+        // 新しい制約を設定
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        // 強制的にレイアウトを更新
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+        
+        print("🔧 WebView constraints set:")
+        print("   - Top: safeAreaLayoutGuide.topAnchor")
+        print("   - Leading: view.leadingAnchor")
+        print("   - Trailing: view.trailingAnchor")
+        print("   - Bottom: view.bottomAnchor")
+    }
+    
     private func loadGame() {
-        // 複数のURLを試す
-        let urls = [
+        // 実際のゲームを読み込み
+        print("🎮 Loading actual game...")
+        
+        // ゲームのURL
+        let gameURLs = [
             "http://localhost:3000",      // シミュレーター用
             "http://127.0.0.1:3000",      // シミュレーター用（代替）
             "http://192.168.0.12:3000"    // 実機用
         ]
         
-        for (index, devServerURL) in urls.enumerated() {
-            print("🌐 Attempt \(index + 1): Loading game from: \(devServerURL)")
+        for (index, gameURL) in gameURLs.enumerated() {
+            print("🌐 Game Attempt \(index + 1): \(gameURL)")
             
-            guard let url = URL(string: devServerURL) else {
-                print("❌ Invalid URL: \(devServerURL)")
+            guard let url = URL(string: gameURL) else {
+                print("❌ Invalid game URL: \(gameURL)")
                 continue
             }
             
             let request = URLRequest(url: url)
             webView.load(request)
-            print("📡 Request sent to: \(devServerURL)")
+            print("📡 Game request sent to: \(gameURL)")
             return
         }
         
-        print("❌ All URLs failed")
+        print("❌ All game URLs failed, showing fallback")
         showError()
     }
     
@@ -127,6 +190,57 @@ extension ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("✅ WebView loaded successfully!")
         print("🎮 Game should be visible now")
+        
+        // WebViewの状態を確認
+        print("🔍 WebView Debug Info:")
+        print("   - Frame: \(webView.frame)")
+        print("   - Bounds: \(webView.bounds)")
+        print("   - Alpha: \(webView.alpha)")
+        print("   - Hidden: \(webView.isHidden)")
+        print("   - Opaque: \(webView.isOpaque)")
+        print("   - Background: \(webView.backgroundColor?.description ?? "nil")")
+        
+        // デバッグ用：ページのタイトルを取得
+        webView.evaluateJavaScript("document.title") { (result, error) in
+            if let title = result as? String {
+                print("📄 Page title: \(title)")
+            }
+        }
+        
+        // デバッグ用：ページの内容を確認
+        webView.evaluateJavaScript("document.body.innerHTML.length") { (result, error) in
+            if let length = result as? Int {
+                print("📏 Page content length: \(length)")
+            }
+        }
+        
+        // デバッグ用：ページの表示状態を確認
+        webView.evaluateJavaScript("document.body.style.display") { (result, error) in
+            if let display = result as? String {
+                print("📱 Body display: \(display)")
+            }
+        }
+        
+        // デバッグ用：ページの可視性を確認
+        webView.evaluateJavaScript("document.visibilityState") { (result, error) in
+            if let visibility = result as? String {
+                print("👁️ Visibility state: \(visibility)")
+            }
+        }
+        
+        // 強制的にWebViewを再描画
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // サイズを再確認
+            print("🔄 Final WebView check:")
+            print("   - Frame: \(webView.frame)")
+            print("   - Bounds: \(webView.bounds)")
+            
+            // 強制的に再描画
+            webView.setNeedsDisplay()
+            webView.setNeedsLayout()
+            webView.frame = self.view.bounds
+            print("🔄 WebView refresh triggered")
+        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
