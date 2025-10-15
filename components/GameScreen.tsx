@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { CANDY_WIDTH, PARTICLE_COLORS, GAME_DURATION_SECONDS, CANDY_SPEED_PIXELS_PER_SECOND } from '../constants';
 import { SoundSettings, Slice, ScorePopup, Particle, Difficulty, Obstacle } from '../types';
+import { soundGenerator } from '../utils/soundGenerator';
 
 const CANDY_SEGMENT_WIDTH = 800; // px
 
@@ -13,14 +14,29 @@ interface GameScreenProps {
   candyPatterns: string[];
 }
 
-const playSound = (url: string, volume: number, isMuted: boolean) => {
+// 効果音再生関数（新しいWeb Audio APIベース）
+const playSound = async (soundType: 'slice' | 'combo' | 'miss' | 'gameOver' | 'button', volume: number, isMuted: boolean) => {
     if (isMuted) return;
     try {
-        const audio = new Audio(url);
-        audio.volume = volume;
-        audio.play().catch(e => console.error("Audio play failed:", e));
+        switch (soundType) {
+            case 'slice':
+                await soundGenerator.playSliceSound(volume);
+                break;
+            case 'combo':
+                await soundGenerator.playComboSound(volume);
+                break;
+            case 'miss':
+                await soundGenerator.playMissSound(volume);
+                break;
+            case 'gameOver':
+                await soundGenerator.playGameOverSound(volume);
+                break;
+            case 'button':
+                await soundGenerator.playButtonSound(volume);
+                break;
+        }
     } catch (e) {
-        console.error("Audio could not be played:", e);
+        console.error("Sound play failed:", e);
     }
 };
 
@@ -40,7 +56,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ soundSettings, onGameOver, diff
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const candySegmentARef = useRef<HTMLDivElement>(null);
   const candySegmentBRef = useRef<HTMLDivElement>(null);
-  const bgmRef = useRef<HTMLAudioElement | null>(null);
   const candyPatternsRef = useRef({ a: candyPatterns[0], b: candyPatterns[1] });
   const lastTimeRef = useRef<number | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -49,24 +64,31 @@ const GameScreen: React.FC<GameScreenProps> = ({ soundSettings, onGameOver, diff
   });
   const timerEndTimeRef = useRef<number | null>(null);
   const timerAnimationRef = useRef<number>();
+  const bgmIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // BGM管理（新しいWeb Audio APIベース）
   useEffect(() => {
-    const bgm = bgmRef.current;
-    if (!bgm) return;
-
     if (isGameOver) {
-      bgm.pause();
-    } else {
-      bgm.volume = soundSettings.isMuted ? 0 : soundSettings.bgmVolume;
-      bgm.play().catch(e => console.error("BGM playback failed:", e));
+      if (bgmIntervalRef.current) {
+        clearInterval(bgmIntervalRef.current);
+        bgmIntervalRef.current = null;
+      }
+    } else if (!soundSettings.isMuted) {
+      // BGMを開始
+      const startBGM = () => {
+        soundGenerator.playBGM(soundSettings.bgmVolume);
+      };
+      startBGM();
+      bgmIntervalRef.current = setInterval(startBGM, 2000);
     }
-  }, [isGameOver, soundSettings]);
 
-  useEffect(() => {
-    const bgm = bgmRef.current;
-    if (!bgm) return;
-    bgm.volume = soundSettings.isMuted ? 0 : soundSettings.bgmVolume;
-  }, [soundSettings.isMuted, soundSettings.bgmVolume]);
+    return () => {
+      if (bgmIntervalRef.current) {
+        clearInterval(bgmIntervalRef.current);
+        bgmIntervalRef.current = null;
+      }
+    };
+  }, [isGameOver, soundSettings.isMuted, soundSettings.bgmVolume]);
   
   // Game reset and timer setup
   useEffect(() => {
@@ -230,7 +252,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ soundSettings, onGameOver, diff
 
     const targetElement = e.target as HTMLElement;
     if (targetElement.closest('[data-obstacle="true"]')) {
-        playSound('https://assets.mixkit.co/sfx/preview/mixkit-small-hit-in-a-game-2088.mp3', soundSettings.sfxVolume, soundSettings.isMuted);
+        playSound('gameOver', soundSettings.sfxVolume, soundSettings.isMuted);
         setIsGameOver(true);
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
@@ -280,24 +302,18 @@ const GameScreen: React.FC<GameScreenProps> = ({ soundSettings, onGameOver, diff
       if (newCombo > 2) {
         setShowCombo(true);
         setTimeout(() => setShowCombo(false), 800);
-        playSound('https://assets.mixkit.co/sfx/preview/mixkit-video-game-win-2016.mp3', soundSettings.sfxVolume, soundSettings.isMuted);
+        playSound('combo', soundSettings.sfxVolume, soundSettings.isMuted);
       } else {
-        playSound('https://assets.mixkit.co/sfx/preview/mixkit-fast-sword-whoosh-2792.mp3', soundSettings.sfxVolume, soundSettings.isMuted);
+        playSound('slice', soundSettings.sfxVolume, soundSettings.isMuted);
       }
     } else {
       setCombo(0);
-      playSound('https://assets.mixkit.co/sfx/preview/mixkit-air-woosh-1489.mp3', soundSettings.sfxVolume * 0.5, soundSettings.isMuted);
+      playSound('miss', soundSettings.sfxVolume * 0.5, soundSettings.isMuted);
     }
   };
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
-      <audio 
-        ref={bgmRef}
-        src="https://www.chosic.com/wp-content/uploads/2021/07/The-Road-to-La-Paz.mp3"
-        loop
-        preload="auto"
-      />
       <div className="w-full max-w-4xl flex justify-between items-center px-4 mb-4">
         <div className="text-4xl text-amber-900 font-bold bg-white/60 px-4 py-2 rounded-lg shadow-md border border-white/50">
           スコア: <span className="text-red-600">{score}</span>
