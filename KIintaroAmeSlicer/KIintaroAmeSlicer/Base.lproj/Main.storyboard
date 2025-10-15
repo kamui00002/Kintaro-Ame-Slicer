@@ -34,7 +34,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="webView" destination="iiI-ER-HPZ" id="PCQ-o4-bGK"/>
+                        <outlet property="webView" destination="iiI-ER-HPZ" id="2cZ-cn-rVj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
