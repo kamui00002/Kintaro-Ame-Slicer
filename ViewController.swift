@@ -16,26 +16,17 @@ class ViewController: UIViewController {
     }
     
     private func loadLocalHTML() {
-        // まず "index" を試す
-        if let htmlPath = Bundle.main.path(forResource: "index", ofType: "html") {
-            let htmlURL = URL(fileURLWithPath: htmlPath)
-            let htmlDirectory = htmlURL.deletingLastPathComponent()
-            webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlDirectory)
-            print("Loading index.html from: \(htmlPath)")
-            return
-        }
-        
-        // "index 2" を試す
-        if let htmlPath = Bundle.main.path(forResource: "index 2", ofType: "html") {
-            let htmlURL = URL(fileURLWithPath: htmlPath)
-            let htmlDirectory = htmlURL.deletingLastPathComponent()
-            webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlDirectory)
-            print("Loading index 2.html from: \(htmlPath)")
+        // 開発サーバーから直接読み込み
+        let devServerURL = "http://192.168.0.12:3000"
+        if let url = URL(string: devServerURL) {
+            let request = URLRequest(url: url)
+            webView.load(request)
+            print("Loading from development server: \(devServerURL)")
             return
         }
         
         // フォールバック: 簡単なHTMLを表示
-        print("HTML file not found, using fallback")
+        print("Using fallback HTML")
         let htmlString = """
         <!DOCTYPE html>
         <html>
@@ -57,7 +48,7 @@ class ViewController: UIViewController {
         <body>
             <h1>金太郎飴スライサー</h1>
             <p>ゲームを読み込み中...</p>
-            <p>HTMLファイルが見つかりませんでした。</p>
+            <p>開発サーバーに接続中...</p>
         </body>
         </html>
         """
