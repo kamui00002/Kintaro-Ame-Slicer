@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E00325F02EA1323C00D34232 /* index 4.html in Resources */ = {isa = PBXBuildFile; fileRef = E00325EF2EA1323C00D34232 /* index 4.html */; };
-		E00325F22EA1326F00D34232 /* manifest 2.json in Resources */ = {isa = PBXBuildFile; fileRef = E00325F12EA1326F00D34232 /* manifest 2.json */; };
-		E00325F72EA132C100D34232 /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E00325F52EA132C100D34232 /* index-CMQOwZvE.js */; };
+		E00326012EA1357400D34232 /* index 4.html in Resources */ = {isa = PBXBuildFile; fileRef = E00325F92EA1343000D34232 /* index 4.html */; };
+		E00326022EA1357900D34232 /* manifest 2.json in Resources */ = {isa = PBXBuildFile; fileRef = E00325FB2EA1344800D34232 /* manifest 2.json */; };
+		E00326032EA1358200D34232 /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E00325FD2EA1345C00D34232 /* index-CMQOwZvE.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E00325EF2EA1323C00D34232 /* index 4.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "index 4.html"; sourceTree = "<group>"; };
-		E00325F12EA1326F00D34232 /* manifest 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "manifest 2.json"; sourceTree = "<group>"; };
-		E00325F52EA132C100D34232 /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
+		E00325F92EA1343000D34232 /* index 4.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "index 4.html"; sourceTree = "<group>"; };
+		E00325FB2EA1344800D34232 /* manifest 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "manifest 2.json"; sourceTree = "<group>"; };
+		E00325FD2EA1345C00D34232 /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
 		E0B5E10D2E9F4F2A0042A4EB /* KIintaroAmeSlicer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIintaroAmeSlicer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,15 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E00325F62EA132C100D34232 /* assets 2 */ = {
+		E00325FE2EA1345C00D34232 /* assets 2 */ = {
 			isa = PBXGroup;
 			children = (
-				E00325F52EA132C100D34232 /* index-CMQOwZvE.js */,
+				E00325FD2EA1345C00D34232 /* index-CMQOwZvE.js */,
 			);
 			path = "assets 2";
 			sourceTree = "<group>";
 		};
-		E00325F82EA132DD00D34232 /* sounds */ = {
+		E00326002EA1347200D34232 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -69,10 +69,10 @@
 		E0B5E1042E9F4F2A0042A4EB = {
 			isa = PBXGroup;
 			children = (
-				E00325F82EA132DD00D34232 /* sounds */,
-				E00325EF2EA1323C00D34232 /* index 4.html */,
-				E00325F12EA1326F00D34232 /* manifest 2.json */,
-				E00325F62EA132C100D34232 /* assets 2 */,
+				E00325F92EA1343000D34232 /* index 4.html */,
+				E00325FB2EA1344800D34232 /* manifest 2.json */,
+				E00325FE2EA1345C00D34232 /* assets 2 */,
+				E00326002EA1347200D34232 /* sounds */,
 				E0B5E10F2E9F4F2A0042A4EB /* KIintaroAmeSlicer */,
 				E0B5E10E2E9F4F2A0042A4EB /* Products */,
 			);
@@ -150,9 +150,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E00325F72EA132C100D34232 /* index-CMQOwZvE.js in Resources */,
-				E00325F22EA1326F00D34232 /* manifest 2.json in Resources */,
-				E00325F02EA1323C00D34232 /* index 4.html in Resources */,
+				E00326032EA1358200D34232 /* index-CMQOwZvE.js in Resources */,
+				E00326022EA1357900D34232 /* manifest 2.json in Resources */,
+				E00326012EA1357400D34232 /* index 4.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
