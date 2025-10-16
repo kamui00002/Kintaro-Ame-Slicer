@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="金太郎飴スライサー" />
+    <meta name="theme-color" content="#fbbf24" />
+    <link rel="manifest" href="./manifest.json" />
+    <title>金太郎飴スライサー</title>
+    <style>
+      /* Fallback font for offline use */
+      @font-face {
+        font-family: 'Yusei Magic';
+        src: local('Arial'), local('Helvetica'), local('sans-serif');
+        font-display: swap;
+      }
+    </style>
+    <style>
+      body {
+        font-family: 'Yusei Magic', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fbbf24;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #root {
+        width: 100%;
+        height: 100vh;
+        background-color: #fbbf24;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #333;
+      }
+      .loading {
+        text-align: center;
+      }
+    </style>
+    <!-- CSS file removed - using inline styles -->
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading">
+        <h1>🍭 金太郎飴スライサー</h1>
+        <p>ゲームを読み込み中...</p>
+        <p>JavaScriptが読み込まれていません</p>
+      </div>
+    </div>
+    <script>
+      console.log('HTML loaded successfully - XCODE VERSION 7.0 - GAME.HTML');
+      console.log('Root element:', document.getElementById('root'));
+      console.log('Body children:', document.body.children.length);
+      console.log('File size check: 8441 bytes expected');
+      console.log('Script path: ./app.js');
+      console.log('Timestamp:', new Date().toISOString());
+      console.log('FORCE UPDATE COMPLETED');
+      console.log('Current URL:', window.location.href);
+      console.log('Base URL:', document.baseURI);
+      console.log('=== CRITICAL DEBUG INFO ===');
+      console.log('Document title:', document.title);
+      console.log('Document ready state:', document.readyState);
+      console.log('Window location:', window.location.href);
+      console.log('Document base URI:', document.baseURI);
+      console.log('Script elements count:', document.querySelectorAll('script').length);
+      console.log('Module script elements count:', document.querySelectorAll('script[type="module"]').length);
+      
+      // 即座にJavaScriptの読み込み状態をチェック
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.includes('JavaScriptが読み込まれていません')) {
+          console.log('JavaScript failed to load - showing fallback XCODE V7.0');
+          console.log('Script element:', document.querySelector('script[type="module"]'));
+          console.log('Script src:', document.querySelector('script[type="module"]')?.src);
+          console.log('Current URL:', window.location.href);
+          console.log('Base URL:', document.baseURI);
+          
+          // ファイルの存在を確認
+          fetch('./app.js')
+            .then(response => {
+              console.log('Fetch response status:', response.status);
+              console.log('Fetch response ok:', response.ok);
+              console.log('Fetch response headers:', response.headers);
+              return response.text();
+            })
+            .then(text => {
+              console.log('File content length:', text.length);
+              console.log('File content preview:', text.substring(0, 100));
+            })
+            .catch(error => {
+              console.log('Fetch error:', error);
+              console.log('Error type:', error.constructor.name);
+              console.log('Error message:', error.message);
+            });
+          
+          // 代替パスでも試す
+          fetch('app.js')
+            .then(response => {
+              console.log('Alternative fetch response status:', response.status);
+              return response.text();
+            })
+            .then(text => {
+              console.log('Alternative file content length:', text.length);
+            })
+            .catch(error => {
+              console.log('Alternative fetch error:', error);
+            });
+          
+          // より詳細なファイル情報を取得
+          console.log('=== FILE SYSTEM DEBUG ===');
+          console.log('Current directory:', window.location.pathname);
+          console.log('Base directory:', window.location.pathname.replace('/index.html', ''));
+          console.log('Script element src:', document.querySelector('script[type="module"]')?.src);
+          console.log('Script element type:', document.querySelector('script[type="module"]')?.type);
+          console.log('Script element async:', document.querySelector('script[type="module"]')?.async);
+          console.log('Script element defer:', document.querySelector('script[type="module"]')?.defer);
+          
+          // ファイルの存在をより詳細に確認
+          console.log('=== DETAILED FILE CHECK ===');
+          console.log('Trying to access app.js with different methods...');
+          
+          // XMLHttpRequestで試す
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', './app.js', true);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+              console.log('XHR Status:', xhr.status);
+              console.log('XHR Response length:', xhr.responseText.length);
+              console.log('XHR Response text preview:', xhr.responseText.substring(0, 100));
+              if (xhr.status === 200) {
+                console.log('XHR Success - File exists and is accessible');
+              } else {
+                console.log('XHR Failed - File not accessible');
+                console.log('XHR Error details:', xhr.statusText);
+              }
+            }
+          };
+          xhr.onerror = function() {
+            console.log('XHR Error event triggered');
+          };
+          xhr.send();
+          
+          // 直接的なファイルアクセスを試す
+          try {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = './app.js';
+            script.onload = () => console.log('Script loaded successfully via createElement');
+            script.onerror = (e) => console.log('Script failed to load via createElement:', e);
+            document.head.appendChild(script);
+          } catch (error) {
+            console.log('createElement error:', error);
+          }
+          
+          root.innerHTML = `
+            <div class="loading">
+              <h1>🍭 金太郎飴スライサー</h1>
+              <p>⚠️ JavaScriptの読み込みに失敗しました</p>
+              <p>アプリを再起動してください</p>
+              <p>Version: XCODE V7.0 - Script: ./app.js</p>
+              <p>Expected size: 8441 bytes</p>
+              <p>FORCE UPDATE COMPLETED</p>
+              <p>Script src: ${document.querySelector('script[type="module"]')?.src || 'not found'}</p>
+              <p>Current URL: ${window.location.href}</p>
+              <p>=== CRITICAL DEBUG ===</p>
+              <p>Document title: ${document.title}</p>
+              <p>Script elements: ${document.querySelectorAll('script').length}</p>
+              <p>Module scripts: ${document.querySelectorAll('script[type="module"]').length}</p>
+              <p>=== FILE SYSTEM DEBUG ===</p>
+              <p>Current directory: ${window.location.pathname}</p>
+              <p>Base directory: ${window.location.pathname.replace('/index.html', '')}</p>
+              <p>Script type: ${document.querySelector('script[type="module"]')?.type || 'not found'}</p>
+              <p>=== DETAILED FILE CHECK ===</p>
+              <p>XHR Status: 0 (File not accessible)</p>
+              <p>XHR and createElement tests running...</p>
+            </div>
+          `;
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>

@@ -91,7 +91,10 @@ class ViewController: UIViewController {
         print("🎮 Loading game from local bundle...")
         
         // ローカルファイルから読み込み
-        if let url = Bundle.main.url(forResource: "index", withExtension: "html") {
+
+
+        // 新しい行に変更
+        if let url = Bundle.main.url(forResource: "game_final", withExtension: "html")  {
             print("📁 Loading from: \(url.path)")
             print("📁 Base URL: \(url.deletingLastPathComponent())")
             

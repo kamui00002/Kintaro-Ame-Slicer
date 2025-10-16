@@ -43,8 +43,6 @@
         text-align: center;
       }
     </style>
-    <!-- CSS file removed - using inline styles -->
-    <script type="module" src="./app.js"></script>
   </head>
   <body>
     <div id="root">
@@ -55,11 +53,11 @@
       </div>
     </div>
     <script>
-      console.log('HTML loaded successfully - XCODE VERSION 5.0 - FORCE FIX');
+      console.log('HTML loaded successfully - XCODE VERSION 8.0 - EMBEDDED');
       console.log('Root element:', document.getElementById('root'));
       console.log('Body children:', document.body.children.length);
-      console.log('File size check: 8441 bytes expected');
-      console.log('Script path: ./app.js');
+      console.log('File size check: 8442 bytes expected');
+      console.log('Script path: EMBEDDED');
       console.log('Timestamp:', new Date().toISOString());
       console.log('FORCE UPDATE COMPLETED');
       console.log('Current URL:', window.location.href);
@@ -76,7 +74,7 @@
       setTimeout(() => {
         const root = document.getElementById('root');
         if (root && root.innerHTML.includes('JavaScriptが読み込まれていません')) {
-          console.log('JavaScript failed to load - showing fallback XCODE V5.0');
+          console.log('JavaScript failed to load - showing fallback XCODE V8.0');
           console.log('Script element:', document.querySelector('script[type="module"]'));
           console.log('Script src:', document.querySelector('script[type="module"]')?.src);
           console.log('Current URL:', window.location.href);
@@ -164,8 +162,8 @@
               <h1>🍭 金太郎飴スライサー</h1>
               <p>⚠️ JavaScriptの読み込みに失敗しました</p>
               <p>アプリを再起動してください</p>
-              <p>Version: XCODE V5.0 - Script: ./app.js</p>
-              <p>Expected size: 8441 bytes</p>
+              <p>Version: XCODE V8.0 - Script: EMBEDDED</p>
+              <p>Expected size: 8442 bytes</p>
               <p>FORCE UPDATE COMPLETED</p>
               <p>Script src: ${document.querySelector('script[type="module"]')?.src || 'not found'}</p>
               <p>Current URL: ${window.location.href}</p>

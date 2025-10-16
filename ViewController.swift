@@ -18,29 +18,18 @@ class ViewController: UIViewController {
     }
     
     private func loadGame() {
-        // 複数のURLを試す
-        let urls = [
-            "http://localhost:3000",      // シミュレーター用
-            "http://127.0.0.1:3000",      // シミュレーター用（代替）
-            "http://192.168.0.12:3000"    // 実機用
-        ]
-        
-        for (index, devServerURL) in urls.enumerated() {
-            print("🌐 Attempt \(index + 1): Loading game from: \(devServerURL)")
-            
-            guard let url = URL(string: devServerURL) else {
-                print("❌ Invalid URL: \(devServerURL)")
-                continue
-            }
-            
-            let request = URLRequest(url: url)
-            webView.load(request)
-            print("📡 Request sent to: \(devServerURL)")
-            return
+        print("🎮 Loading game from local bundle...")
+
+        // ローカルファイルから読み込み
+        if let url = Bundle.main.url(forResource: "game_ultimate", withExtension: "html") {
+            print("📁 Loading from: \(url.path)")
+            print("📁 Base URL: \(url.deletingLastPathComponent())")
+
+            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        } else {
+            print("❌ game_complete.html not found in bundle")
+            showError()
         }
-        
-        print("❌ All URLs failed")
-        showError()
     }
     
     private func showError() {
