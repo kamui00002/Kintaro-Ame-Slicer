@@ -90,14 +90,14 @@ class ViewController: UIViewController {
     private func loadGame() {
         print("🎮 Loading game from local bundle...")
         
-        // ローカルファイルから読み込み（subdirectory使用）
-        if let url = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "dist") {
+        // ローカルファイルから読み込み
+        if let url = Bundle.main.url(forResource: "index", withExtension: "html") {
             print("📁 Loading from: \(url.path)")
             print("📁 Base URL: \(url.deletingLastPathComponent())")
             
             webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
         } else {
-            print("❌ index.html not found in bundle/dist")
+            print("❌ index.html not found in bundle")
             showError()
         }
     }
@@ -213,6 +213,19 @@ extension ViewController: WKNavigationDelegate {
         webView.evaluateJavaScript("document.body.innerHTML.length") { (result, error) in
             if let length = result as? Int {
                 print("📏 Page content length: \(length)")
+            }
+        }
+        
+        // 追加のデバッグ情報
+        webView.evaluateJavaScript("document.getElementById('root').innerHTML") { (result, error) in
+            if let rootContent = result as? String {
+                print("🔍 Root content: \(rootContent.prefix(100))...")
+            }
+        }
+        
+        webView.evaluateJavaScript("document.body.children.length") { (result, error) in
+            if let childrenCount = result as? Int {
+                print("👶 Body children count: \(childrenCount)")
             }
         }
         
