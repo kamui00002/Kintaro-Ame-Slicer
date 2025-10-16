@@ -6,16 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		E00326252EA13EEB00D34232 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E00326212EA13E5E00D34232 /* index.html */; };
-		E00326262EA13EEF00D34232 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = E00326232EA13E7E00D34232 /* manifest.json */; };
-		E00326272EA13EF400D34232 /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E00326172EA13E2A00D34232 /* index-CMQOwZvE.js */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		E00326172EA13E2A00D34232 /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
-		E00326212EA13E5E00D34232 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		E00326232EA13E7E00D34232 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		E0B5E10D2E9F4F2A0042A4EB /* KIintaroAmeSlicer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIintaroAmeSlicer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,28 +42,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E00326182EA13E2A00D34232 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				E00326172EA13E2A00D34232 /* index-CMQOwZvE.js */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
-		E003261C2EA13E2A00D34232 /* sounds */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = sounds;
-			sourceTree = "<group>";
-		};
 		E0B5E1042E9F4F2A0042A4EB = {
 			isa = PBXGroup;
 			children = (
-				E00326212EA13E5E00D34232 /* index.html */,
-				E00326232EA13E7E00D34232 /* manifest.json */,
-				E00326182EA13E2A00D34232 /* assets */,
-				E003261C2EA13E2A00D34232 /* sounds */,
 				E0B5E10F2E9F4F2A0042A4EB /* KIintaroAmeSlicer */,
 				E0B5E10E2E9F4F2A0042A4EB /* Products */,
 			);
@@ -150,9 +122,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E00326272EA13EF400D34232 /* index-CMQOwZvE.js in Resources */,
-				E00326262EA13EEF00D34232 /* manifest.json in Resources */,
-				E00326252EA13EEB00D34232 /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
