@@ -25,12 +25,55 @@
         margin: 0;
         padding: 0;
         background-color: #fbbf24;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #root {
+        width: 100%;
+        height: 100vh;
+        background-color: #fbbf24;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #333;
+      }
+      .loading {
+        text-align: center;
       }
     </style>
-    <link rel="stylesheet" href="./index.css">
+    <!-- CSS file removed - using inline styles -->
   <script type="module" src="./assets/index-CMQOwZvE.js"></script>
 </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loading">
+        <h1>🍭 金太郎飴スライサー</h1>
+        <p>ゲームを読み込み中...</p>
+        <p>JavaScriptが読み込まれていません</p>
+      </div>
+    </div>
+    <script>
+      console.log('HTML loaded successfully');
+      console.log('Root element:', document.getElementById('root'));
+      console.log('Body children:', document.body.children.length);
+      
+      // 5秒後にJavaScriptが読み込まれていない場合の警告
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.includes('JavaScriptが読み込まれていません')) {
+          console.log('JavaScript failed to load - showing fallback');
+          root.innerHTML = `
+            <div class="loading">
+              <h1>🍭 金太郎飴スライサー</h1>
+              <p>⚠️ JavaScriptの読み込みに失敗しました</p>
+              <p>アプリを再起動してください</p>
+            </div>
+          `;
+        }
+      }, 5000);
+    </script>
   </body>
 </html>

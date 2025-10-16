@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E00326092EA137DC00D34232 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E00326082EA137DC00D34232 /* index.html */; };
 		E003260D2EA1382900D34232 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = E003260C2EA1382900D34232 /* manifest.json */; };
 		E00326132EA1387800D34232 /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E00326112EA1387800D34232 /* index-CMQOwZvE.js */; };
+		E00326162EA13C4800D34232 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E00326152EA13C4800D34232 /* index.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E00326082EA137DC00D34232 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		E003260C2EA1382900D34232 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		E00326112EA1387800D34232 /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
+		E00326152EA13C4800D34232 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		E0B5E10D2E9F4F2A0042A4EB /* KIintaroAmeSlicer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIintaroAmeSlicer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -69,7 +69,7 @@
 		E0B5E1042E9F4F2A0042A4EB = {
 			isa = PBXGroup;
 			children = (
-				E00326082EA137DC00D34232 /* index.html */,
+				E00326152EA13C4800D34232 /* index.html */,
 				E003260C2EA1382900D34232 /* manifest.json */,
 				E00326122EA1387800D34232 /* assets */,
 				E00326142EA1388C00D34232 /* sounds */,
@@ -150,9 +150,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E00326092EA137DC00D34232 /* index.html in Resources */,
 				E003260D2EA1382900D34232 /* manifest.json in Resources */,
 				E00326132EA1387800D34232 /* index-CMQOwZvE.js in Resources */,
+				E00326162EA13C4800D34232 /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
