@@ -25,6 +25,16 @@ class ViewController: UIViewController {
         webView.configuration.allowsInlineMediaPlayback = true
         webView.configuration.mediaTypesRequiringUserActionForPlayback = []
         
+        // JavaScriptログ機能を追加
+        let src = """
+        window.addEventListener('error', e => window.webkit.messageHandlers.log.postMessage('JS ERROR: '+e.message));
+        window.addEventListener('unhandledrejection', e => window.webkit.messageHandlers.log.postMessage('PROMISE: '+e.reason));
+        console.log = (...a)=>window.webkit.messageHandlers.log.postMessage(a.join(' '));
+        console.log('entry loaded');
+        """
+        webView.configuration.userContentController.addUserScript(WKUserScript(source: src, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+        webView.configuration.userContentController.add(self, name: "log")
+        
         // WebViewのサイズを強制設定
         setupWebViewConstraints()
         
@@ -78,32 +88,18 @@ class ViewController: UIViewController {
     }
     
     private func loadGame() {
-        // 実際のゲームを読み込み
-        print("🎮 Loading actual game...")
+        print("🎮 Loading game from local bundle...")
         
-        // ゲームのURL
-        let gameURLs = [
-            "http://localhost:3000",      // シミュレーター用
-            "http://127.0.0.1:3000",      // シミュレーター用（代替）
-            "http://192.168.0.12:3000"    // 実機用
-        ]
-        
-        for (index, gameURL) in gameURLs.enumerated() {
-            print("🌐 Game Attempt \(index + 1): \(gameURL)")
+        // ローカルファイルから読み込み（subdirectory使用）
+        if let url = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "dist") {
+            print("📁 Loading from: \(url.path)")
+            print("📁 Base URL: \(url.deletingLastPathComponent())")
             
-            guard let url = URL(string: gameURL) else {
-                print("❌ Invalid game URL: \(gameURL)")
-                continue
-            }
-            
-            let request = URLRequest(url: url)
-            webView.load(request)
-            print("📡 Game request sent to: \(gameURL)")
-            return
+            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        } else {
+            print("❌ index.html not found in bundle/dist")
+            showError()
         }
-        
-        print("❌ All game URLs failed, showing fallback")
-        showError()
     }
     
     private func showError() {
@@ -166,14 +162,20 @@ class ViewController: UIViewController {
                 <h1>🍭 金太郎飴スライサー</h1>
                 <div class="loading"></div>
                 <p>ゲームを読み込み中...</p>
-                <p>開発サーバーに接続しています</p>
-                <p><strong>URL:</strong> http://localhost:3000</p>
+                <p>ローカルファイルから読み込んでいます</p>
                 <p>しばらくお待ちください...</p>
             </div>
         </body>
         </html>
         """
         webView.loadHTMLString(htmlString, baseURL: nil)
+    }
+}
+
+// MARK: - WKScriptMessageHandler
+extension ViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("[WEB]", message.body)
     }
 }
 

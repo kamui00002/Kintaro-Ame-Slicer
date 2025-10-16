@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E0B5E1402E9FE2D30042A4EB /* index 2.html in Resources */ = {isa = PBXBuildFile; fileRef = E0B5E13F2E9FE2D30042A4EB /* index 2.html */; };
-		E0B5E1422E9FE2E90042A4EB /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = E0B5E1412E9FE2E90042A4EB /* manifest.json */; };
-		E0B5E14E2E9FEC660042A4EB /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E0B5E1432E9FE31E0042A4EB /* index-CMQOwZvE.js */; };
+		E00325F02EA1323C00D34232 /* index 4.html in Resources */ = {isa = PBXBuildFile; fileRef = E00325EF2EA1323C00D34232 /* index 4.html */; };
+		E00325F22EA1326F00D34232 /* manifest 2.json in Resources */ = {isa = PBXBuildFile; fileRef = E00325F12EA1326F00D34232 /* manifest 2.json */; };
+		E00325F72EA132C100D34232 /* index-CMQOwZvE.js in Resources */ = {isa = PBXBuildFile; fileRef = E00325F52EA132C100D34232 /* index-CMQOwZvE.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E00325EF2EA1323C00D34232 /* index 4.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "index 4.html"; sourceTree = "<group>"; };
+		E00325F12EA1326F00D34232 /* manifest 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "manifest 2.json"; sourceTree = "<group>"; };
+		E00325F52EA132C100D34232 /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
 		E0B5E10D2E9F4F2A0042A4EB /* KIintaroAmeSlicer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIintaroAmeSlicer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0B5E13F2E9FE2D30042A4EB /* index 2.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "index 2.html"; sourceTree = "<group>"; };
-		E0B5E1412E9FE2E90042A4EB /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
-		E0B5E1432E9FE31E0042A4EB /* index-CMQOwZvE.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "index-CMQOwZvE.js"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -51,13 +51,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E00325F62EA132C100D34232 /* assets 2 */ = {
+			isa = PBXGroup;
+			children = (
+				E00325F52EA132C100D34232 /* index-CMQOwZvE.js */,
+			);
+			path = "assets 2";
+			sourceTree = "<group>";
+		};
+		E00325F82EA132DD00D34232 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		E0B5E1042E9F4F2A0042A4EB = {
 			isa = PBXGroup;
 			children = (
-				E0B5E13F2E9FE2D30042A4EB /* index 2.html */,
-				E0B5E1412E9FE2E90042A4EB /* manifest.json */,
-				E0B5E1442E9FE31E0042A4EB /* assets */,
-				E0B5E1462E9FE3380042A4EB /* sounds */,
+				E00325F82EA132DD00D34232 /* sounds */,
+				E00325EF2EA1323C00D34232 /* index 4.html */,
+				E00325F12EA1326F00D34232 /* manifest 2.json */,
+				E00325F62EA132C100D34232 /* assets 2 */,
 				E0B5E10F2E9F4F2A0042A4EB /* KIintaroAmeSlicer */,
 				E0B5E10E2E9F4F2A0042A4EB /* Products */,
 			);
@@ -69,21 +84,6 @@
 				E0B5E10D2E9F4F2A0042A4EB /* KIintaroAmeSlicer.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E0B5E1442E9FE31E0042A4EB /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				E0B5E1432E9FE31E0042A4EB /* index-CMQOwZvE.js */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
-		E0B5E1462E9FE3380042A4EB /* sounds */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +150,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0B5E1402E9FE2D30042A4EB /* index 2.html in Resources */,
-				E0B5E1422E9FE2E90042A4EB /* manifest.json in Resources */,
-				E0B5E14E2E9FEC660042A4EB /* index-CMQOwZvE.js in Resources */,
+				E00325F72EA132C100D34232 /* index-CMQOwZvE.js in Resources */,
+				E00325F22EA1326F00D34232 /* manifest 2.json in Resources */,
+				E00325F02EA1323C00D34232 /* index 4.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
